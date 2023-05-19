@@ -19,14 +19,13 @@ public class CustomerBusiness implements CustomerInterface{
 	public void createCustomer(int customerId, String customerName, String customerAddress, String customerEmail) {
 		
 		// Create bean object of customer
-		Customer customer1 = new Customer();
-		customer1.setCustomerID(customerId);
-		customer1.setCustomerAddress(customerAddress);
-		customer1.setCustomerName(customerName);
-		customer1.setEmail(customerEmail);
+		Customer customer = new Customer();
+		customer.setCustomerID(customerId);
+		customer.setCustomerAddress(customerAddress);
+		customer.setCustomerName(customerName);
+		customer.setEmail(customerEmail);
 		
-		customers.add(customer1);
-		
+		customers.add(customer);
 		
 	}
 	
@@ -39,6 +38,7 @@ public class CustomerBusiness implements CustomerInterface{
 				customer.setCustomerName(customerName);
 				customer.setEmail(customerEmail);
 				flag = true;
+				break;
 			}
 		}
 		return flag;
@@ -52,6 +52,7 @@ public class CustomerBusiness implements CustomerInterface{
 			if(customer.getCustomerID() == customerId) {
 				deletedCustomer = customer;
 				flag = true;
+				break;
 			}
 		}
 		
@@ -64,7 +65,8 @@ public class CustomerBusiness implements CustomerInterface{
 	public void listCustomer() {
 		
 		for(Customer customer: customers) {
-			System.out.println("Details of customer:-->"+ customer.getCustomerID() +"---"+customer.getCustomerName());
+			System.out.println("Details of customer:-->"+ customer.getCustomerID() + "---" + customer.getCustomerName());
 		}
 	}
+	
 }
