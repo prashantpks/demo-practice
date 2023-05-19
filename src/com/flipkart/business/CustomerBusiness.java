@@ -15,44 +15,56 @@ public class CustomerBusiness implements CustomerInterface{
 	// business skt method of customer mgmt
 	List <Customer> customers = new ArrayList<Customer>();
 	
-	public void createCustomer() {
-		System.out.println("impl of create cust");
+	// Create customer
+	public void createCustomer(int customerId, String customerName, String customerAddress, String customerEmail) {
 		
 		// Create bean object of customer
 		Customer customer1 = new Customer();
-		customer1.setCustomerID(101);
-		customer1.setCustomerAddress("delhi");
-		customer1.setCustomerName("amit");
-		customer1.setEmail("dsfs");
+		customer1.setCustomerID(customerId);
+		customer1.setCustomerAddress(customerAddress);
+		customer1.setCustomerName(customerName);
+		customer1.setEmail(customerEmail);
 		
 		customers.add(customer1);
 		
-		Customer customer2 = new Customer();
-		customer2.setCustomerID(102);
-		customer2.setCustomerAddress("mumbai");
-		customer2.setCustomerName("pks");
-		customer2.setEmail("sdfds");
-		
-		customers.add(customer2);
-
 		
 	}
 	
-	public int updateCustomer(int id) {
-		System.out.println("impl of upd cust");
-		return id;
+	// Update customer
+	public boolean updateCustomer(int customerId, String customerName, String customerAddress, String customerEmail ) {
+		boolean flag = false;
+		for(Customer customer: customers) {
+			if(customer.getCustomerID() == customerId) {
+				customer.setCustomerAddress(customerAddress);
+				customer.setCustomerName(customerName);
+				customer.setEmail(customerEmail);
+				flag = true;
+			}
+		}
+		return flag;
 	}
 	
-	public boolean deleteCustomer(int id) {
-		System.out.println("impl of del cust");
-		return true;
+	// Delete customer 
+	public boolean deleteCustomer(int customerId) {
+		boolean flag = false;
+		Customer deletedCustomer = null; 
+		for(Customer customer: customers) {
+			if(customer.getCustomerID() == customerId) {
+				deletedCustomer = customer;
+				flag = true;
+			}
+		}
+		
+		if(flag) customers.remove(deletedCustomer);
+		return flag;
 	}
 	
+	
+	// List all customers
 	public void listCustomer() {
-		System.out.println("impl of cust list");
 		
-		for(Customer cust: customers) {
-			System.out.println("Details of customer:-->"+ cust.getCustomerID() +"---"+cust.getCustomerName());
+		for(Customer customer: customers) {
+			System.out.println("Details of customer:-->"+ customer.getCustomerID() +"---"+customer.getCustomerName());
 		}
 	}
 }
